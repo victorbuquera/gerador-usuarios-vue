@@ -3,7 +3,6 @@ const app = Vue.createApp({
     data(){
         return {
             firstName: 'Cara',
-            lastName: 'Aleatório',
             email: 'maybe@you.com',
             gender:'male',
             picture: 'https://randomuser.me/api/portraits/men/10.jpg',
@@ -11,15 +10,16 @@ const app = Vue.createApp({
     },
     methods: {
        async getUser() {
-            const res = await fetch('https://randomuser.me/api')
+            const res = await fetch('https://rickandmortyapi.com/api/character')
             const { results } = await res.json()
             
+            index = Math.floor(Math.random()*20 )
+
             console.log(results)
-            this.firstName = results[0].name.first
-            this.lastName = results[0].name.last
-            this.email = results[0].email            
-            this.gender = results[0].gender    
-            this.picture = results[0].picture.large
+            this.firstName = results[index].name
+            this.email = results[index].species            
+            this.gender = results[index].gender    
+            this.picture = results[index].image
         }
     }
 })
